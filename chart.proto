@@ -1,0 +1,306 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "main";
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+
+// DataService contains endpoints&grpc calls
+service DataService {
+
+    // Create data source
+    rpc CreateSource (CreateSourceRequest) returns (CreateSourceResponse){
+        option (google.api.http) = {
+            post: "/v1/source/create"
+            body: "data"
+            };
+    }
+    // Read data source
+    rpc ReadSource (ReadSourceRequest) returns (ReadSourceResponse){
+        option (google.api.http) = {
+            get: "/v1/source/{unique}"
+          };
+    }
+    // Update data source
+    rpc UpdateSource (UpdateSourceRequest) returns (UpdateSourceResponse){
+        option (google.api.http) = {
+            put: "/v1/source/update"
+            body: "data"
+          };
+    }
+    // Delete data source
+    rpc DeleteSource (DeleteSourceRequest) returns (DeleteSourceResponse){
+        option (google.api.http) = {
+            delete: "/v1/source/delete/{unique}"
+            };
+    }
+    // List data sources
+    rpc ListSource (ListSourceRequest) returns (ListSourceResponse){
+        option (google.api.http) = {
+            get: "/v1/source/list"
+          };
+    }
+
+    // Create chart
+    rpc CreateChart (CreateChartRequest) returns (CreateChartResponse){
+        option (google.api.http) = {
+            post: "/v1/chart/create"
+            body: "data"
+          };
+    }
+    // Read chart
+    rpc ReadChart (ReadChartRequest) returns (ReadChartResponse){
+        option (google.api.http) = {
+            get: "/v1/chart/{unique}"
+          };
+    }
+    // Update chart
+    rpc UpdateChart (UpdateChartRequest) returns (UpdateChartResponse){
+        option (google.api.http) = {
+            put: "/v1/chart/update"
+            body: "data"
+          };
+    }
+    // Delete chart
+    rpc DeleteChart (DeleteChartRequest) returns (DeleteChartResponse){
+        option (google.api.http) = {
+            delete: "/v1/chart/delete/{unique}"
+          };
+    }
+    // List charts
+    rpc ListChart (ListChartRequest) returns (ListChartResponse){
+        option (google.api.http) = {
+            get: "/v1/chart/list"
+          };
+    }
+}
+
+// Sources list
+message Sources{
+    // Charts list
+    // @inject_tag: bson:"sources" json:"sources"
+    repeated Source source = 1;
+}
+
+// Source struct for service
+message Source {
+    // unique ID gen by client
+    // @inject_tag: bson:"unique" json:"unique"
+    string unique = 1;
+    // Name of data
+    // @inject_tag: bson:"name" json:"name"
+    string name = 2;
+    // Address
+    // @inject_tag: bson:"address" json:"address"
+    string address = 3;
+    // User
+    // @inject_tag: bson:"user" json:"user"
+    string user = 4;
+    // Password
+    // @inject_tag: bson:"password" json:"password"
+    string password = 5;
+    // Database
+    // @inject_tag: bson:"database" json:"database"
+    string database = 6;
+    // Collection
+    // @inject_tag: bson:"collection" json:"collection"
+    string collection = 7;
+    // Created
+    // @inject_tag: bson:"created" json:"created"
+    string created = 8;
+    // Modified
+    // @inject_tag: bson:"modified" json:"modified"
+    string modified = 9;
+    // Version
+    // @inject_tag: bson:"version" json:"version"
+    int64 version = 10;
+    // Versions
+    // @inject_tag: bson:"versions" json:"versions"
+    string versions = 11;
+}
+
+
+// CreateSourceRequest
+// receive data from client
+message CreateSourceRequest {
+    Source data = 1;
+}
+
+// CreateSourceResponse
+// return ID for new created data
+message CreateSourceResponse {
+    string status = 1;
+}
+
+// ReadSourceRequest
+// receive unique in GET request
+message ReadSourceRequest {
+    string unique = 1;
+}
+// ReadSourceResponse
+// retrive data by unique
+// return NOT_FOUND if failed
+message ReadSourceResponse {
+    Source data = 1;
+}
+
+// UpdateSourceRequest
+// receive data with Unique to update certain object
+message UpdateSourceRequest {
+    Source data = 1;
+}
+
+// UpdateSourceResponse
+// return NOT_FOUND if failed
+message UpdateSourceResponse {
+    string status = 1;
+}
+
+
+// DeleteSourceRequest
+// receive unique, delete object by unique
+message DeleteSourceRequest {
+    string unique = 1;
+}
+
+// DeleteSourceResponse
+// return NOT_FOUND if failed
+message DeleteSourceResponse {
+    string status = 1;
+}
+
+// ListSourceRequest 
+// receive filters by widcard
+message ListSourceRequest {
+
+}
+
+// ListSourceResponse
+// retrive charts list
+message ListSourceResponse {
+    Sources data = 1;
+}
+
+
+// Charts list
+message Charts{
+    // Charts list
+    // @inject_tag: bson:"charts" json:"charts"
+    repeated Chart charts = 1;
+}
+
+// Chart struct for service
+message Chart {
+    // unique ID gen by client
+    // @inject_tag: bson:"unique" json:"unique"
+    string unique = 1;
+    // Source of data
+    // @inject_tag: bson:"source" json:"source"
+    string source = 2;
+    // Name of data
+    // @inject_tag: bson:"title" json:"title"
+    string title = 3;
+    // Type of chart
+    // @inject_tag: bson:"type" json:"type"
+    string type = 4;
+    // Type of chart
+    // @inject_tag: bson:"series" json:"series"
+    repeated Serie series = 5;
+    // Chart periods
+    // @inject_tag: bson:"periods" json:"periods"
+    repeated string periods = 6;
+    // Query aggregation
+    // @inject_tag: bson:"query" json:"query"
+    string query = 7;
+    // Invertval update in minutes 
+    // @inject_tag: bson:"interval" json:"interval"
+    string interval = 8;
+    // Created
+    // @inject_tag: bson:"created" json:"created"
+    string created = 9;
+    // Modified
+    // @inject_tag: bson:"modified" json:"modified"
+    string modified = 10;
+    // Version
+    // @inject_tag: bson:"version" json:"version"
+    int64 version = 11;
+    // Versions
+    // @inject_tag: bson:"versions" json:"versions"
+    string versions = 12;
+
+}
+
+// Serie data 
+message Serie{
+    // Serie name
+    // @inject_tag: bson:"name" json:"name"
+    string name = 1;
+    // Serie values
+    // @inject_tag: bson:"data" json:"data"
+    repeated int64 values = 2;
+
+}
+
+// CreateChartRequest
+// receive data from client
+message CreateChartRequest {
+    Chart data = 1;
+}
+
+// CreateChartResponse
+// return ID for new created data
+message CreateChartResponse {
+    string status = 1;
+}
+
+// ReadChartRequest
+// receive unique in GET request
+message ReadChartRequest {
+    string unique = 1;
+}
+
+// ReadChartResponse
+// retrive data by unique
+// return NOT_FOUND if failed
+message ReadChartResponse {
+    Chart data = 1;
+}
+
+// UpdateChartRequest
+// receive data with Unique to update certain object
+message UpdateChartRequest {
+    Chart data = 1;
+}
+
+// UpdateChartResponse
+// return NOT_FOUND if failed
+message UpdateChartResponse {
+    string status = 1;
+}
+
+// DeleteChartRequest
+// receive unique, delete object by unique
+message DeleteChartRequest {
+    string unique = 1;
+}
+
+// DeleteChartResponse
+// return NOT_FOUND if failed
+message DeleteChartResponse {
+    string status = 1;
+}
+
+// ListChartRequest 
+// receive filters by widcard
+message ListChartRequest {
+
+}
+
+// ListChartResponse
+// retrive charts list
+message ListChartResponse {
+    Charts data = 1;
+}
+

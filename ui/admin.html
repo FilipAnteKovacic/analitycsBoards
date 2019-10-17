@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="UTF-8">
+
+		<title>AnalyticsBoards</title>
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Web Fonts  -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+		<!-- Web Fonts  -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+        <!-- Font awsome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
+
+        <script src="/static/chart.js"></script>
+        <script src="/static/crud.js"></script>
+        <script src="/static/ws.js"></script>
+
+	</head>
+	<body>
+
+        <input type="hidden" name="ws" id="ws" value="{{ .WSURL }}">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                Analytics boards
+            </a>
+            <button 
+                class="navbar-toggler" 
+                type="button" 
+                data-toggle="collapse" 
+                data-target="#navbarToggler" 
+                aria-controls="navbarToggler" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link adminLink" href="#" data-nav="sources">Sources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link adminLink" href="#" data-nav="charts">Charts</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link adminLink" href="#" data-nav="boards">Boards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="/static/chart.swagger.json">Swagger JSON</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div id="sources" class="col-12 view">
+
+                    {{template "sources" .}}
+
+                </div>
+
+                <div id="charts" class="col-12 view">
+
+                    {{template "charts" .}}
+
+                </div>
+                <div id="boards" class="col-12 view">
+
+                    {{template "boards" .}}
+
+                </div>
+
+                <div id="chart" class="col-12 view"> 
+                
+                    <h4 class="chartHeader"></h4>
+
+                    <div id="chartCanvas"></div>                        
+                </div>
+
+            <div>
+        <div>
+
+	</body>
+</html>

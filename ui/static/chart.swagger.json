@@ -1,0 +1,509 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "chart.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/chart/create": {
+      "post": {
+        "summary": "Create chart",
+        "operationId": "CreateChart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainCreateChartResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mainChart"
+            }
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/chart/delete/{unique}": {
+      "delete": {
+        "summary": "Delete chart",
+        "operationId": "DeleteChart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainDeleteChartResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "unique",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/chart/list": {
+      "get": {
+        "summary": "List charts",
+        "operationId": "ListChart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainListChartResponse"
+            }
+          }
+        },
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/chart/update": {
+      "put": {
+        "summary": "Update chart",
+        "operationId": "UpdateChart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainUpdateChartResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mainChart"
+            }
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/chart/{unique}": {
+      "get": {
+        "summary": "Read chart",
+        "operationId": "ReadChart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainReadChartResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "unique",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/source/create": {
+      "post": {
+        "summary": "Create data source",
+        "operationId": "CreateSource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainCreateSourceResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mainSource"
+            }
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/source/delete/{unique}": {
+      "delete": {
+        "summary": "Delete data source",
+        "operationId": "DeleteSource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainDeleteSourceResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "unique",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/source/list": {
+      "get": {
+        "summary": "List data sources",
+        "operationId": "ListSource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainListSourceResponse"
+            }
+          }
+        },
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/source/update": {
+      "put": {
+        "summary": "Update data source",
+        "operationId": "UpdateSource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainUpdateSourceResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mainSource"
+            }
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/source/{unique}": {
+      "get": {
+        "summary": "Read data source",
+        "operationId": "ReadSource",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mainReadSourceResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "unique",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "mainChart": {
+      "type": "object",
+      "properties": {
+        "unique": {
+          "type": "string",
+          "title": "unique ID gen by client\n@inject_tag: bson:\"unique\" json:\"unique\""
+        },
+        "source": {
+          "type": "string",
+          "title": "Source of data\n@inject_tag: bson:\"source\" json:\"source\""
+        },
+        "title": {
+          "type": "string",
+          "title": "Name of data\n@inject_tag: bson:\"title\" json:\"title\""
+        },
+        "type": {
+          "type": "string",
+          "title": "Type of chart\n@inject_tag: bson:\"type\" json:\"type\""
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mainSerie"
+          },
+          "title": "Type of chart\n@inject_tag: bson:\"series\" json:\"series\""
+        },
+        "periods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Chart periods\n@inject_tag: bson:\"periods\" json:\"periods\""
+        },
+        "query": {
+          "type": "string",
+          "title": "Query aggregation\n@inject_tag: bson:\"query\" json:\"query\""
+        },
+        "interval": {
+          "type": "string",
+          "title": "Invertval update in minutes \n@inject_tag: bson:\"interval\" json:\"interval\""
+        },
+        "created": {
+          "type": "string",
+          "title": "Created\n@inject_tag: bson:\"created\" json:\"created\""
+        },
+        "modified": {
+          "type": "string",
+          "title": "Modified\n@inject_tag: bson:\"modified\" json:\"modified\""
+        },
+        "version": {
+          "type": "string",
+          "format": "int64",
+          "title": "Version\n@inject_tag: bson:\"version\" json:\"version\""
+        },
+        "versions": {
+          "type": "string",
+          "title": "Versions\n@inject_tag: bson:\"versions\" json:\"versions\""
+        }
+      },
+      "title": "Chart struct for service"
+    },
+    "mainCharts": {
+      "type": "object",
+      "properties": {
+        "charts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mainChart"
+          },
+          "title": "Charts list\n@inject_tag: bson:\"charts\" json:\"charts\""
+        }
+      },
+      "title": "Charts list"
+    },
+    "mainCreateChartResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "CreateChartResponse\nreturn ID for new created data"
+    },
+    "mainCreateSourceResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "CreateSourceResponse\nreturn ID for new created data"
+    },
+    "mainDeleteChartResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteChartResponse\nreturn NOT_FOUND if failed"
+    },
+    "mainDeleteSourceResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteSourceResponse\nreturn NOT_FOUND if failed"
+    },
+    "mainListChartResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/mainCharts"
+        }
+      },
+      "title": "ListChartResponse\nretrive charts list"
+    },
+    "mainListSourceResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/mainSources"
+        }
+      },
+      "title": "ListSourceResponse\nretrive charts list"
+    },
+    "mainReadChartResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/mainChart"
+        }
+      },
+      "title": "ReadChartResponse\nretrive data by unique\nreturn NOT_FOUND if failed"
+    },
+    "mainReadSourceResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/mainSource"
+        }
+      },
+      "title": "ReadSourceResponse\nretrive data by unique\nreturn NOT_FOUND if failed"
+    },
+    "mainSerie": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Serie name\n@inject_tag: bson:\"name\" json:\"name\""
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "Serie values\n@inject_tag: bson:\"data\" json:\"data\""
+        }
+      },
+      "title": "Serie data"
+    },
+    "mainSource": {
+      "type": "object",
+      "properties": {
+        "unique": {
+          "type": "string",
+          "title": "unique ID gen by client\n@inject_tag: bson:\"unique\" json:\"unique\""
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of data\n@inject_tag: bson:\"name\" json:\"name\""
+        },
+        "address": {
+          "type": "string",
+          "title": "Address\n@inject_tag: bson:\"address\" json:\"address\""
+        },
+        "user": {
+          "type": "string",
+          "title": "User\n@inject_tag: bson:\"user\" json:\"user\""
+        },
+        "password": {
+          "type": "string",
+          "title": "Password\n@inject_tag: bson:\"password\" json:\"password\""
+        },
+        "database": {
+          "type": "string",
+          "title": "Database\n@inject_tag: bson:\"database\" json:\"database\""
+        },
+        "collection": {
+          "type": "string",
+          "title": "Collection\n@inject_tag: bson:\"collection\" json:\"collection\""
+        },
+        "created": {
+          "type": "string",
+          "title": "Created\n@inject_tag: bson:\"created\" json:\"created\""
+        },
+        "modified": {
+          "type": "string",
+          "title": "Modified\n@inject_tag: bson:\"modified\" json:\"modified\""
+        },
+        "version": {
+          "type": "string",
+          "format": "int64",
+          "title": "Version\n@inject_tag: bson:\"version\" json:\"version\""
+        },
+        "versions": {
+          "type": "string",
+          "title": "Versions\n@inject_tag: bson:\"versions\" json:\"versions\""
+        }
+      },
+      "title": "Source struct for service"
+    },
+    "mainSources": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mainSource"
+          },
+          "title": "Charts list\n@inject_tag: bson:\"sources\" json:\"sources\""
+        }
+      },
+      "title": "Sources list"
+    },
+    "mainUpdateChartResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateChartResponse\nreturn NOT_FOUND if failed"
+    },
+    "mainUpdateSourceResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateSourceResponse\nreturn NOT_FOUND if failed"
+    }
+  }
+}
